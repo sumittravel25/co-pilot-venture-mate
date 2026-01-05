@@ -1,1 +1,4 @@
 project_id = "ekiegqywspztgunjlfkz"
+
+[functions.proactive-insights]
+verify_jwt = false
