@@ -330,10 +330,9 @@ End with: "VALIDATION_SCORE: [number]" where number is 0-100.`,
                     </div>
 
                     {idea.validation_reasoning && (
-                      <div className="mt-4 p-4 bg-muted/50 rounded-lg">
+                      <div className="mt-4 p-4 bg-muted/50 rounded-lg max-h-[500px] overflow-y-auto">
                         <p className="text-sm text-foreground whitespace-pre-wrap">
-                          {idea.validation_reasoning.slice(0, 500)}
-                          {idea.validation_reasoning.length > 500 && "..."}
+                          {idea.validation_reasoning}
                         </p>
                       </div>
                     )}
