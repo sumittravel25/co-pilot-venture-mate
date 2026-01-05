@@ -11,7 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Map, Loader2, Sparkles, CheckCircle2, Circle, ChevronRight } from "lucide-react";
+import { Map, Loader2, Sparkles, CheckCircle2, Circle, ChevronRight, Rocket } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface Idea {
@@ -345,6 +345,21 @@ Be specific and practical. Focus on speed to market.`;
                     </span>
                   </div>
                 )}
+              </div>
+              {/* Build with Emergent.sh Button */}
+              <div className="mt-6 pt-6 border-t border-border">
+                <a
+                  href="https://app.emergent.sh/?via=sumit"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity"
+                >
+                  <Rocket className="w-4 h-4" />
+                  Build this idea live with Emergent.sh
+                </a>
+                <p className="text-xs text-muted-foreground mt-2">
+                  Turn your validated idea into a working app using no-code
+                </p>
               </div>
             </div>
 
