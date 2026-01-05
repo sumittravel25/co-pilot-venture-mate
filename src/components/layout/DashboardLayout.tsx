@@ -12,6 +12,7 @@ import {
   FileText,
   LogOut,
   User,
+  LayoutDashboard,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -20,6 +21,7 @@ interface DashboardLayoutProps {
 }
 
 const navItems = [
+  { icon: LayoutDashboard, label: "Dashboard", path: "/dashboard" },
   { icon: Lightbulb, label: "Ideas", path: "/dashboard/ideas" },
   { icon: Map, label: "Roadmap", path: "/dashboard/roadmap" },
   { icon: MessageSquare, label: "Chat", path: "/dashboard/chat" },
