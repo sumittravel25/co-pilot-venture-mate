@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
+import { ProactiveInsights } from "@/components/dashboard/ProactiveInsights";
 import { Lightbulb, Map, MessageSquare, GitBranch, BarChart3, FileText, ArrowRight } from "lucide-react";
 
 const quickLinks = [
@@ -32,6 +33,9 @@ export default function Dashboard() {
           </h1>
           <p className="text-muted-foreground mt-1">What do you want to work on today?</p>
         </header>
+
+        {/* Proactive AI Insights */}
+        <ProactiveInsights />
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {quickLinks.map((link) => (
