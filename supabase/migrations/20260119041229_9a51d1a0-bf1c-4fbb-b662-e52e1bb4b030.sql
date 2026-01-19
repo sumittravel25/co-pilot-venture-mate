@@ -1,0 +1,20 @@
+-- Add comprehensive profile fields for personalized AI insights
+ALTER TABLE public.profiles
+ADD COLUMN IF NOT EXISTS profile_completed boolean DEFAULT false,
+ADD COLUMN IF NOT EXISTS primary_role text,
+ADD COLUMN IF NOT EXISTS industry text,
+ADD COLUMN IF NOT EXISTS experience_level text,
+ADD COLUMN IF NOT EXISTS primary_skills text[] DEFAULT '{}',
+ADD COLUMN IF NOT EXISTS biggest_strength text,
+ADD COLUMN IF NOT EXISTS time_availability_hours integer,
+ADD COLUMN IF NOT EXISTS budget_comfort text,
+ADD COLUMN IF NOT EXISTS risk_tolerance text,
+ADD COLUMN IF NOT EXISTS decision_style text,
+ADD COLUMN IF NOT EXISTS common_struggles text[] DEFAULT '{}',
+ADD COLUMN IF NOT EXISTS feedback_style text,
+ADD COLUMN IF NOT EXISTS learning_preference text,
+ADD COLUMN IF NOT EXISTS inspirations text,
+ADD COLUMN IF NOT EXISTS country text,
+ADD COLUMN IF NOT EXISTS allow_ai_influence boolean DEFAULT true,
+ADD COLUMN IF NOT EXISTS allow_anonymized_learning boolean DEFAULT false,
+ADD COLUMN IF NOT EXISTS exclude_sensitive_entries boolean DEFAULT false;

@@ -194,34 +194,88 @@ export type Database = {
       }
       profiles: {
         Row: {
+          allow_ai_influence: boolean | null
+          allow_anonymized_learning: boolean | null
+          biggest_strength: string | null
+          budget_comfort: string | null
+          common_struggles: string[] | null
           constraints: string | null
+          country: string | null
           created_at: string
+          decision_style: string | null
+          exclude_sensitive_entries: boolean | null
+          experience_level: string | null
+          feedback_style: string | null
           full_name: string | null
           goals: string | null
           id: string
+          industry: string | null
+          inspirations: string | null
+          learning_preference: string | null
+          primary_role: string | null
+          primary_skills: string[] | null
+          profile_completed: boolean | null
+          risk_tolerance: string | null
           skills: string[] | null
+          time_availability_hours: number | null
           timezone: string | null
           updated_at: string
           user_id: string
         }
         Insert: {
+          allow_ai_influence?: boolean | null
+          allow_anonymized_learning?: boolean | null
+          biggest_strength?: string | null
+          budget_comfort?: string | null
+          common_struggles?: string[] | null
           constraints?: string | null
+          country?: string | null
           created_at?: string
+          decision_style?: string | null
+          exclude_sensitive_entries?: boolean | null
+          experience_level?: string | null
+          feedback_style?: string | null
           full_name?: string | null
           goals?: string | null
           id?: string
+          industry?: string | null
+          inspirations?: string | null
+          learning_preference?: string | null
+          primary_role?: string | null
+          primary_skills?: string[] | null
+          profile_completed?: boolean | null
+          risk_tolerance?: string | null
           skills?: string[] | null
+          time_availability_hours?: number | null
           timezone?: string | null
           updated_at?: string
           user_id: string
         }
         Update: {
+          allow_ai_influence?: boolean | null
+          allow_anonymized_learning?: boolean | null
+          biggest_strength?: string | null
+          budget_comfort?: string | null
+          common_struggles?: string[] | null
           constraints?: string | null
+          country?: string | null
           created_at?: string
+          decision_style?: string | null
+          exclude_sensitive_entries?: boolean | null
+          experience_level?: string | null
+          feedback_style?: string | null
           full_name?: string | null
           goals?: string | null
           id?: string
+          industry?: string | null
+          inspirations?: string | null
+          learning_preference?: string | null
+          primary_role?: string | null
+          primary_skills?: string[] | null
+          profile_completed?: boolean | null
+          risk_tolerance?: string | null
           skills?: string[] | null
+          time_availability_hours?: number | null
           timezone?: string | null
           updated_at?: string
           user_id?: string
