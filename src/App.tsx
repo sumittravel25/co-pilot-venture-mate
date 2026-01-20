@@ -14,6 +14,7 @@ import Chat from "./pages/Chat";
 import Decisions from "./pages/Decisions";
 import Metrics from "./pages/Metrics";
 import Reviews from "./pages/Reviews";
+import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +37,7 @@ const App = () => (
             <Route path="/dashboard/decisions" element={<Decisions />} />
             <Route path="/dashboard/metrics" element={<Metrics />} />
             <Route path="/dashboard/reviews" element={<Reviews />} />
+            <Route path="/dashboard/profile" element={<Profile />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
