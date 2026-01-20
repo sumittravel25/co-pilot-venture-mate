@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
-import { supabase } from "@/integrations/supabase/client";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { ProactiveInsights } from "@/components/dashboard/ProactiveInsights";
+import { ProfilePrompt } from "@/components/dashboard/ProfilePrompt";
 import { Lightbulb, Map, MessageSquare, GitBranch, BarChart3, FileText, ArrowRight, Loader2 } from "lucide-react";
 
 const quickLinks = [
@@ -18,34 +18,14 @@ const quickLinks = [
 export default function Dashboard() {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
-  const [checkingProfile, setCheckingProfile] = useState(true);
 
   useEffect(() => {
     if (!loading && !user) {
       navigate("/auth");
-      return;
-    }
-
-    if (user) {
-      // Check if profile setup is complete
-      const checkProfile = async () => {
-        const { data } = await supabase
-          .from("profiles")
-          .select("profile_completed")
-          .eq("user_id", user.id)
-          .single();
-
-        if (!data?.profile_completed) {
-          navigate("/profile-setup");
-        } else {
-          setCheckingProfile(false);
-        }
-      };
-      checkProfile();
     }
   }, [user, loading, navigate]);
 
-  if (loading || checkingProfile) {
+  if (loading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <Loader2 className="w-6 h-6 animate-spin text-primary" />
@@ -62,6 +42,9 @@ export default function Dashboard() {
           </h1>
           <p className="text-muted-foreground mt-1">What do you want to work on today?</p>
         </header>
+
+        {/* Profile Completion Prompt */}
+        <ProfilePrompt />
 
         {/* Proactive AI Insights */}
         <ProactiveInsights />

@@ -28,6 +28,7 @@ const navItems = [
   { icon: GitBranch, label: "Decisions", path: "/dashboard/decisions" },
   { icon: BarChart3, label: "Metrics", path: "/dashboard/metrics" },
   { icon: FileText, label: "Reviews", path: "/dashboard/reviews" },
+  { icon: User, label: "Profile", path: "/dashboard/profile" },
 ];
 
 export function DashboardLayout({ children }: DashboardLayoutProps) {
