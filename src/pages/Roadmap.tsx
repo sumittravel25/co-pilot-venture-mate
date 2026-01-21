@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
+import { SubscriptionGate } from "@/components/subscription/SubscriptionGate";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import {
@@ -251,6 +252,7 @@ Be specific and practical. Focus on speed to market.`;
 
   return (
     <DashboardLayout>
+      <SubscriptionGate>
       <div className="p-6 space-y-6">
         <header className="flex items-center justify-between">
           <div>
@@ -422,6 +424,7 @@ Be specific and practical. Focus on speed to market.`;
           </div>
         )}
       </div>
+      </SubscriptionGate>
     </DashboardLayout>
   );
 }

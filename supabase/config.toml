@@ -2,3 +2,12 @@ project_id = "ekiegqywspztgunjlfkz"
 
 [functions.proactive-insights]
 verify_jwt = false
+
+[functions.co-founder-chat]
+verify_jwt = false
+
+[functions.razorpay-create-order]
+verify_jwt = false
+
+[functions.razorpay-verify-payment]
+verify_jwt = false

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
+import { SubscriptionGate } from "@/components/subscription/SubscriptionGate";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -207,6 +208,7 @@ End with: "VALIDATION_SCORE: [number]" where number is 0-100.`,
 
   return (
     <DashboardLayout>
+      <SubscriptionGate>
       <div className="p-6 space-y-6">
         <header className="flex items-center justify-between">
           <div>
@@ -361,6 +363,7 @@ End with: "VALIDATION_SCORE: [number]" where number is 0-100.`,
           </div>
         )}
       </div>
+      </SubscriptionGate>
     </DashboardLayout>
   );
 }
