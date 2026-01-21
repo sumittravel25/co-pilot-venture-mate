@@ -60,11 +60,12 @@ serve(async (req) => {
 
     console.log(`Creating order: ${plan_type}, ${currency}, amount: ${amount}`);
 
-    // Create Razorpay order
+    // Create Razorpay order - receipt must be max 40 chars
+    const shortUserId = user.id.replace(/-/g, '').slice(0, 12);
     const orderData = {
       amount: amount,
       currency: currency,
-      receipt: `order_${user.id}_${Date.now()}`,
+      receipt: `ord_${shortUserId}_${Date.now()}`,
       notes: {
         user_id: user.id,
         plan_type: plan_type,
