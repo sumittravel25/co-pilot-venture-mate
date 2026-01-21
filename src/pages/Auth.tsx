@@ -99,8 +99,8 @@ export default function Auth() {
           <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 mb-4">
             <Sparkles className="w-6 h-6 text-primary" />
           </div>
-          <h1 className="text-2xl font-semibold text-foreground">CoFounder AI</h1>
-          <p className="text-muted-foreground mt-1">Your AI partner for building startups</p>
+          <h1 className="text-2xl font-semibold text-foreground">SOLOAIDE</h1>
+          <p className="text-muted-foreground mt-1">Your AI co-founder</p>
         </div>
 
         {/* Form Card */}

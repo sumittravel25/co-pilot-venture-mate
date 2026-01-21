@@ -20,7 +20,7 @@ export default function Index() {
             <div className="w-9 h-9 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
               <Sparkles className="w-5 h-5 text-primary" />
             </div>
-            <span className="font-semibold text-foreground">CoFounder AI</span>
+            <span className="font-semibold text-foreground">SOLOAIDE</span>
           </div>
           <Button onClick={() => navigate("/auth")} variant="secondary">
             Get Started

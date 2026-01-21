@@ -52,8 +52,8 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
               <Sparkles className="w-5 h-5 text-primary" />
             </div>
             <div>
-              <h1 className="font-semibold text-foreground">CoFounder AI</h1>
-              <p className="text-xs text-muted-foreground">Your AI partner</p>
+              <h1 className="font-semibold text-foreground">SOLOAIDE</h1>
+              <p className="text-xs text-muted-foreground">Your AI co-founder</p>
             </div>
           </div>
         </div>
