@@ -211,12 +211,20 @@ export type Database = {
           id: string
           industry: string | null
           inspirations: string | null
+          is_legacy_user: boolean | null
           learning_preference: string | null
           primary_role: string | null
           primary_skills: string[] | null
           profile_completed: boolean | null
+          razorpay_customer_id: string | null
+          razorpay_subscription_id: string | null
           risk_tolerance: string | null
           skills: string[] | null
+          subscription_end_date: string | null
+          subscription_id: string | null
+          subscription_plan: string | null
+          subscription_start_date: string | null
+          subscription_status: string | null
           time_availability_hours: number | null
           timezone: string | null
           updated_at: string
@@ -240,12 +248,20 @@ export type Database = {
           id?: string
           industry?: string | null
           inspirations?: string | null
+          is_legacy_user?: boolean | null
           learning_preference?: string | null
           primary_role?: string | null
           primary_skills?: string[] | null
           profile_completed?: boolean | null
+          razorpay_customer_id?: string | null
+          razorpay_subscription_id?: string | null
           risk_tolerance?: string | null
           skills?: string[] | null
+          subscription_end_date?: string | null
+          subscription_id?: string | null
+          subscription_plan?: string | null
+          subscription_start_date?: string | null
+          subscription_status?: string | null
           time_availability_hours?: number | null
           timezone?: string | null
           updated_at?: string
@@ -269,12 +285,20 @@ export type Database = {
           id?: string
           industry?: string | null
           inspirations?: string | null
+          is_legacy_user?: boolean | null
           learning_preference?: string | null
           primary_role?: string | null
           primary_skills?: string[] | null
           profile_completed?: boolean | null
+          razorpay_customer_id?: string | null
+          razorpay_subscription_id?: string | null
           risk_tolerance?: string | null
           skills?: string[] | null
+          subscription_end_date?: string | null
+          subscription_id?: string | null
+          subscription_plan?: string | null
+          subscription_start_date?: string | null
+          subscription_status?: string | null
           time_availability_hours?: number | null
           timezone?: string | null
           updated_at?: string
@@ -366,6 +390,45 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      subscriptions: {
+        Row: {
+          amount: number
+          created_at: string
+          currency: string
+          id: string
+          plan_type: string
+          razorpay_payment_id: string | null
+          razorpay_subscription_id: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          currency: string
+          id?: string
+          plan_type: string
+          razorpay_payment_id?: string | null
+          razorpay_subscription_id?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          currency?: string
+          id?: string
+          plan_type?: string
+          razorpay_payment_id?: string | null
+          razorpay_subscription_id?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
       }
       weekly_reviews: {
         Row: {
