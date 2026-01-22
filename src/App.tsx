@@ -17,6 +17,10 @@ import Metrics from "./pages/Metrics";
 import Reviews from "./pages/Reviews";
 import Profile from "./pages/Profile";
 import Pricing from "./pages/Pricing";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import RefundPolicy from "./pages/RefundPolicy";
+import Contact from "./pages/Contact";
+import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -33,6 +37,10 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/pricing" element={<Pricing />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/refund" element={<RefundPolicy />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/terms" element={<Terms />} />
               <Route path="/profile-setup" element={<ProfileSetup />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/dashboard/ideas" element={<Ideas />} />
