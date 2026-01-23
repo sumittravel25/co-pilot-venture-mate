@@ -22,10 +22,15 @@ export default function Index() {
             </div>
             <span className="font-semibold text-foreground">SOLOAIDE</span>
           </div>
-          <Button onClick={() => navigate("/auth")} variant="secondary">
-            Get Started
-            <ArrowRight className="w-4 h-4 ml-2" />
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button asChild variant="ghost" className="hidden sm:inline-flex">
+              <a href="#about">About Us</a>
+            </Button>
+            <Button onClick={() => navigate("/auth")} variant="secondary">
+              Get Started
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Button>
+          </div>
         </div>
       </header>
 
@@ -81,6 +86,28 @@ export default function Index() {
             </div>
           ))}
         </div>
+
+        <section id="about" className="max-w-4xl mx-auto mt-24 scroll-mt-24">
+          <div className="glass-card rounded-2xl p-8 md:p-10">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground">About Us</h2>
+            <p className="text-muted-foreground mt-4 leading-relaxed">
+              SOLOAIDE is built for solo founders who want execution over hype—helping you validate ideas,
+              plan MVPs, and stay accountable with clear, structured guidance.
+            </p>
+            <p className="text-muted-foreground mt-3 leading-relaxed">
+              If you need support, you can reach us via the Contact Us page.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Button variant="secondary" onClick={() => navigate("/contact")}>
+                Contact Us
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+              <Button asChild variant="outline">
+                <a href="/#about">Copyable About URL</a>
+              </Button>
+            </div>
+          </div>
+        </section>
       </main>
     </div>
   );
