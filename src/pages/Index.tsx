@@ -45,6 +45,25 @@ export default function Index() {
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </div>
+
+           <div className="flex flex-wrap justify-center gap-3 mt-6">
+             <Button variant="outline" onClick={() => navigate("/privacy")}
+             >
+               Privacy Policy
+             </Button>
+             <Button variant="outline" onClick={() => navigate("/refund")}
+             >
+               Refund Policy
+             </Button>
+             <Button variant="outline" onClick={() => navigate("/contact")}
+             >
+               Contact Us
+             </Button>
+             <Button variant="outline" onClick={() => navigate("/terms")}
+             >
+               Terms & Conditions
+             </Button>
+           </div>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6 mt-20 max-w-4xl mx-auto">
