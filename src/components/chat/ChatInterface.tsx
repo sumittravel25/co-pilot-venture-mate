@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Send, Loader2, Sparkles, User } from "lucide-react";
+import { Send, Loader2, Sparkles, User, Lightbulb, Target, TrendingUp, HelpCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface Message {
@@ -18,6 +18,13 @@ interface ChatInterfaceProps {
   initialMessage?: string;
   onMessageSent?: () => void;
 }
+
+const quickPrompts = [
+  { icon: Lightbulb, label: "Validate my idea", prompt: "Can you help me validate my startup idea?" },
+  { icon: Target, label: "Plan MVP", prompt: "Help me plan an MVP for my project" },
+  { icon: TrendingUp, label: "Growth strategy", prompt: "What growth strategies should I focus on?" },
+  { icon: HelpCircle, label: "Ask anything", prompt: "I need advice on..." },
+];
 
 export function ChatInterface({
   contextType = "general",
@@ -75,14 +82,12 @@ export function ChatInterface({
   };
 
   const getUserContext = async () => {
-    // Fetch user profile
     const { data: profile } = await supabase
       .from("profiles")
       .select("*")
       .eq("user_id", user!.id)
       .single();
 
-    // Fetch recent ideas
     const { data: ideas } = await supabase
       .from("ideas")
       .select("title, status, validation_score")
@@ -90,7 +95,6 @@ export function ChatInterface({
       .order("created_at", { ascending: false })
       .limit(5);
 
-    // Fetch recent decisions
     const { data: decisions } = await supabase
       .from("decisions")
       .select("title, chosen_option, confidence_level")
@@ -98,7 +102,6 @@ export function ChatInterface({
       .order("created_at", { ascending: false })
       .limit(5);
 
-    // Fetch recent metrics
     const { data: metrics } = await supabase
       .from("metrics")
       .select("metric_type, value, recorded_at")
@@ -115,7 +118,6 @@ export function ChatInterface({
   };
 
   const getConversationContext = async () => {
-    // Get recent messages for context
     const { data: recentMessages } = await supabase
       .from("chat_messages")
       .select("role, content, created_at")
@@ -140,7 +142,6 @@ export function ChatInterface({
     setInput("");
     setIsLoading(true);
 
-    // Save user message
     await supabase.from("chat_messages").insert({
       user_id: user!.id,
       role: "user",
@@ -177,7 +178,6 @@ export function ChatInterface({
         throw new Error(errorData.error || "Failed to get response");
       }
 
-      // Handle streaming response
       const reader = response.body?.getReader();
       const decoder = new TextDecoder();
       let assistantContent = "";
@@ -225,7 +225,6 @@ export function ChatInterface({
         }
       }
 
-      // Save assistant message
       if (assistantContent) {
         await supabase.from("chat_messages").insert({
           user_id: user!.id,
@@ -257,88 +256,138 @@ export function ChatInterface({
   };
 
   return (
-    <div className="flex flex-col h-full">
-      {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-6 space-y-4">
-        {messages.length === 0 && (
-          <div className="text-center py-12">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 mb-4">
-              <Sparkles className="w-6 h-6 text-primary" />
-            </div>
-            <h3 className="text-lg font-medium text-foreground mb-2">Start a conversation</h3>
-            <p className="text-muted-foreground text-sm max-w-md mx-auto">
-              Share your idea, challenge, or question. I'll give you direct, honest feedback focused on execution.
-            </p>
-          </div>
-        )}
-
-        {messages.map((message, index) => (
-          <div
-            key={index}
-            className={cn(
-              "flex gap-3 animate-fade-in",
-              message.role === "user" ? "justify-end" : "justify-start"
-            )}
-          >
-            {message.role === "assistant" && (
-              <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
-                <Sparkles className="w-4 h-4 text-primary" />
+    <div className="flex flex-col h-full bg-gradient-to-b from-background via-background to-muted/20">
+      {/* Messages Area */}
+      <div className="flex-1 overflow-y-auto px-4 md:px-6 py-6">
+        <div className="max-w-3xl mx-auto space-y-6">
+          {messages.length === 0 && (
+            <div className="text-center py-16 animate-fade-in">
+              {/* AI Avatar with glow */}
+              <div className="relative inline-flex mb-6">
+                <div className="absolute inset-0 bg-primary/30 blur-2xl rounded-full scale-150" />
+                <div className="relative w-20 h-20 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/30 flex items-center justify-center">
+                  <Sparkles className="w-10 h-10 text-primary" />
+                </div>
               </div>
-            )}
+              
+              <h3 className="text-2xl font-semibold text-foreground mb-3">
+                Your AI Co-Founder
+              </h3>
+              <p className="text-muted-foreground text-base max-w-md mx-auto mb-8">
+                Direct, honest feedback focused on execution. No fluff, just actionable insights for your startup journey.
+              </p>
+
+              {/* Quick prompts */}
+              <div className="flex flex-wrap justify-center gap-2 max-w-lg mx-auto">
+                {quickPrompts.map((item, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => handleSendMessage(item.prompt)}
+                    className="group flex items-center gap-2 px-4 py-2.5 rounded-xl bg-secondary/50 hover:bg-secondary border border-border/50 hover:border-primary/30 text-sm text-muted-foreground hover:text-foreground transition-all duration-200"
+                  >
+                    <item.icon className="w-4 h-4 text-primary/70 group-hover:text-primary transition-colors" />
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {messages.map((message, index) => (
             <div
+              key={index}
               className={cn(
-                "max-w-[75%] rounded-2xl px-4 py-3",
-                message.role === "user"
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-muted text-foreground"
+                "flex gap-3 animate-slide-up",
+                message.role === "user" ? "justify-end" : "justify-start"
               )}
+              style={{ animationDelay: `${index * 0.05}s` }}
             >
-              <p className="text-sm whitespace-pre-wrap">{message.content}</p>
-            </div>
-            {message.role === "user" && (
-              <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center flex-shrink-0">
-                <User className="w-4 h-4 text-muted-foreground" />
+              {message.role === "assistant" && (
+                <div className="relative flex-shrink-0">
+                  <div className="absolute inset-0 bg-primary/20 blur-lg rounded-xl" />
+                  <div className="relative w-9 h-9 rounded-xl bg-gradient-to-br from-primary/30 to-primary/10 border border-primary/30 flex items-center justify-center">
+                    <Sparkles className="w-4 h-4 text-primary" />
+                  </div>
+                </div>
+              )}
+              
+              <div
+                className={cn(
+                  "max-w-[80%] rounded-2xl px-4 py-3 shadow-sm",
+                  message.role === "user"
+                    ? "bg-gradient-to-br from-primary to-primary/80 text-primary-foreground"
+                    : "glass-card"
+                )}
+              >
+                <p className={cn(
+                  "text-sm leading-relaxed whitespace-pre-wrap",
+                  message.role === "assistant" && "text-foreground"
+                )}>
+                  {message.content}
+                </p>
               </div>
-            )}
-          </div>
-        ))}
-
-        {isLoading && messages[messages.length - 1]?.role !== "assistant" && (
-          <div className="flex gap-3">
-            <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
-              <Sparkles className="w-4 h-4 text-primary animate-pulse" />
+              
+              {message.role === "user" && (
+                <div className="w-9 h-9 rounded-xl bg-secondary border border-border/50 flex items-center justify-center flex-shrink-0">
+                  <User className="w-4 h-4 text-muted-foreground" />
+                </div>
+              )}
             </div>
-            <div className="bg-muted rounded-2xl px-4 py-3">
-              <Loader2 className="w-4 h-4 animate-spin text-muted-foreground" />
-            </div>
-          </div>
-        )}
+          ))}
 
-        <div ref={messagesEndRef} />
+          {/* Enhanced typing indicator */}
+          {isLoading && messages[messages.length - 1]?.role !== "assistant" && (
+            <div className="flex gap-3 animate-fade-in">
+              <div className="relative flex-shrink-0">
+                <div className="absolute inset-0 bg-primary/20 blur-lg rounded-xl animate-pulse" />
+                <div className="relative w-9 h-9 rounded-xl bg-gradient-to-br from-primary/30 to-primary/10 border border-primary/30 flex items-center justify-center">
+                  <Sparkles className="w-4 h-4 text-primary animate-pulse" />
+                </div>
+              </div>
+              <div className="glass-card rounded-2xl px-5 py-4">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 bg-primary/60 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+                  <span className="w-2 h-2 bg-primary/60 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+                  <span className="w-2 h-2 bg-primary/60 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div ref={messagesEndRef} />
+        </div>
       </div>
 
-      {/* Input */}
-      <div className="p-4 border-t border-border">
-        <div className="flex gap-3">
-          <Textarea
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder="What's on your mind?"
-            className="min-h-[48px] max-h-[120px] resize-none bg-muted border-border focus:border-primary"
-            disabled={isLoading}
-          />
-          <Button
-            onClick={() => handleSendMessage()}
-            disabled={!input.trim() || isLoading}
-            className="shrink-0"
-          >
-            {isLoading ? (
-              <Loader2 className="w-4 h-4 animate-spin" />
-            ) : (
-              <Send className="w-4 h-4" />
-            )}
-          </Button>
+      {/* Enhanced Input Area */}
+      <div className="border-t border-border/50 bg-background/80 backdrop-blur-xl p-4">
+        <div className="max-w-3xl mx-auto">
+          <div className="relative flex items-end gap-3">
+            <div className="flex-1 relative">
+              <Textarea
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder="Ask anything about your startup..."
+                className="min-h-[52px] max-h-[160px] resize-none pr-4 py-3.5 bg-secondary/50 border-border/50 rounded-xl focus:border-primary/50 focus:ring-1 focus:ring-primary/20 placeholder:text-muted-foreground/60 text-foreground"
+                disabled={isLoading}
+              />
+            </div>
+            <Button
+              onClick={() => handleSendMessage()}
+              disabled={!input.trim() || isLoading}
+              size="icon"
+              className="h-[52px] w-[52px] rounded-xl bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all duration-200 hover:shadow-primary/30 hover:scale-[1.02]"
+            >
+              {isLoading ? (
+                <Loader2 className="w-5 h-5 animate-spin" />
+              ) : (
+                <Send className="w-5 h-5" />
+              )}
+            </Button>
+          </div>
+          <p className="text-xs text-muted-foreground/50 text-center mt-3">
+            Press Enter to send • Shift+Enter for new line
+          </p>
         </div>
       </div>
     </div>
