@@ -26,6 +26,9 @@ export default function Index() {
             <Button asChild variant="ghost" className="hidden sm:inline-flex">
               <a href="#about">About Us</a>
             </Button>
+            <Button onClick={() => navigate("/pricing")} variant="ghost" className="hidden sm:inline-flex">
+              Pricing
+            </Button>
             <Button onClick={() => navigate("/auth")} variant="secondary">
               Get Started
               <ArrowRight className="w-4 h-4 ml-2" />
