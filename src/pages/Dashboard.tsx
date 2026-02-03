@@ -4,6 +4,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { ProactiveInsights } from "@/components/dashboard/ProactiveInsights";
 import { ProfilePrompt } from "@/components/dashboard/ProfilePrompt";
+import { SubscriptionStatus } from "@/components/subscription/SubscriptionStatus";
 import { Lightbulb, Map, MessageSquare, GitBranch, BarChart3, FileText, ArrowRight, Loader2 } from "lucide-react";
 
 const quickLinks = [
@@ -42,6 +43,9 @@ export default function Dashboard() {
           </h1>
           <p className="text-muted-foreground mt-1">What do you want to work on today?</p>
         </header>
+
+        {/* Subscription Status */}
+        <SubscriptionStatus />
 
         {/* Profile Completion Prompt */}
         <ProfilePrompt />

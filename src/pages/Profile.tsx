@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
+import { SubscriptionStatus } from "@/components/subscription/SubscriptionStatus";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -224,6 +225,9 @@ export default function Profile() {
             )}
           </Button>
         </header>
+
+        {/* Subscription Status */}
+        <SubscriptionStatus />
 
         <Accordion type="multiple" defaultValue={["core-identity"]} className="space-y-4">
           {/* Core Identity */}
