@@ -5,7 +5,7 @@ import { useSubscription } from "@/hooks/useSubscription";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { Sparkles, Check, Loader2, Crown, ArrowLeft } from "lucide-react";
+ import { Sparkles, Check, Loader2, Crown, ArrowLeft, ChevronLeft } from "lucide-react";
 
 declare global {
   interface Window {
@@ -186,7 +186,15 @@ export default function Pricing() {
       {/* Header */}
       <header className="border-b border-border/50 p-4">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => navigate(-1)}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </Button>
             <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
               <Sparkles className="w-4 h-4 text-primary" />
             </div>
